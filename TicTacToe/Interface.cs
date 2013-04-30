@@ -872,7 +872,7 @@ namespace TicTacToe
         /// <param name="e"></param>
         private void menuItemHelpAbout_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show("Developed by William Andrus\nAll Rights Reserved (c)2006\n\nDeveloped with Microsoft Framework 1.1.4322 SP1\nDeveloped in Microsoft Development Environment 2003 Version 7.1.3088", "About Reinforcement Learning Tic-Tac-Toe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Originally Developed by William Andrus in 2004 & 2006\n", "About Reinforcement Learning Tic-Tac-Toe", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
