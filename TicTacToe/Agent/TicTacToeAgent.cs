@@ -45,6 +45,9 @@ namespace TicTacToe.Agent
         /// <returns></returns>
         protected List<string> getAlternativeStates(string currentState)
         {
+            if(String.IsNullOrEmpty(currentState))
+                return new List<string>(); 
+
             List<string> states = new List<string>();
             states.Add(currentState);
             states.Add((currentState[2].ToString() + currentState[5].ToString() + currentState[8].ToString() + currentState[1].ToString() + currentState[4].ToString() + currentState[7].ToString() + currentState[0].ToString() + currentState[3].ToString() + currentState[6].ToString()));

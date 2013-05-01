@@ -650,6 +650,12 @@ namespace TicTacToe
 
             for (int j = 0; j < count; j++)
             {
+                if (agentMCO != null)
+                    agentMCO.Reset();
+
+                if (agentMCX != null)
+                    agentMCX.Reset();
+
                 this.progressBar.Increment(this.progressBar.Step);
                 this.pictureBox.Invalidate();
 

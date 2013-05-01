@@ -175,7 +175,7 @@ namespace TicTacToe.Agent
 
 			this.visitedStates[moves] = "";
 			
-            moves++;
+            
 			try
 			{
 				for(int p = 0; p < BOARD_SIZE; p++)
@@ -195,8 +195,17 @@ namespace TicTacToe.Agent
 				System.Windows.Forms.MessageBox.Show(e.ToString());
 			}
 
-			
+			moves++;
 			return move;
 		}
+
+        /// <summary>
+        /// Reset seen states when a new game starts.
+        /// </summary>
+        public void Reset()
+        {
+            visitedStates = new string[MAX_STATES];
+            moves = 0;
+        }
 	}
 }
