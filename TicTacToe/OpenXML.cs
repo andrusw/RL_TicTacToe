@@ -3,8 +3,10 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using System.Collections.Generic;
 
 namespace TicTacToe
 {
@@ -19,28 +21,46 @@ namespace TicTacToe
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="xmlFile"></param>
 		public OpenXML(string xmlFile)
 		{
 			//
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
+            
+            List<Tuple<string, string>> states = new List<Tuple<string, string>>();
+            using (XmlTextReader xml = new XmlTextReader(xmlFile))
+            {
+                xml.MoveToContent();
 
-			XmlTextReader xml = new XmlTextReader(xmlFile);
-			xml.MoveToContent();
-			this.treeView1.Nodes.Add("Data");
-			this.treeView1.Nodes[0].Nodes.Add("states");
-			int i = 0;
-			while(xml.Read())
-			{
-				this.treeView1.Nodes[0].Nodes[0].Nodes.Add(xml.GetAttribute("string"));
-				this.treeView1.Nodes[0].Nodes[0].Nodes[i].Nodes.Add("value");
-				this.treeView1.Nodes[0].Nodes[0].Nodes[i].Nodes[0].Nodes.Add(xml.ReadString());
-				i++;
-			}
+                
+                while (xml.Read())
+                {
+                    string attr = xml.GetAttribute("string");
+                    string value = xml.ReadString();
+                    if (!String.IsNullOrEmpty(value) && !String.IsNullOrEmpty(attr))
+                    {
+                        states.Add(new Tuple<string, string>(attr,value));
+                    }
+                }
+            }
 
-			xml.Close();
-			
+            states.Sort();
+
+            this.treeView1.Nodes.Add("Data");
+            this.treeView1.Nodes[0].Nodes.Add("states");
+            int i = 0;
+            foreach(var state in states)
+            {
+                this.treeView1.Nodes[0].Nodes[0].Nodes.Add(state.Item1);
+                this.treeView1.Nodes[0].Nodes[0].Nodes[i].Nodes.Add("value");
+                this.treeView1.Nodes[0].Nodes[0].Nodes[i].Nodes[0].Nodes.Add(state.Item2);
+                i++;
+            }
 		}
 
 		/// <summary>
@@ -90,10 +110,5 @@ namespace TicTacToe
 
 		}
 		#endregion
-
-		private void menuItem2_Click(object sender, System.EventArgs e)
-		{
-			this.Close();
-		}
 	}
 }

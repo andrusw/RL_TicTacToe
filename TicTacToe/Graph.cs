@@ -19,6 +19,9 @@ namespace TicTacToe
 		private System.ComponentModel.Container components = null;
 		private double [] data = new double[8];
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
 		public Graph()
 		{
 			//
@@ -33,157 +36,158 @@ namespace TicTacToe
 			int played;
 			double ans;
 
-			try
+            #region Read XML
+            try
 			{
-				XmlTextReader win = new XmlTextReader("WinPercent.xml");
-				
-				win.ReadStartElement("Win");
-				
-				win.ReadStartElement("DPX");
-				win.ReadStartElement("Won");
-				winNum = int.Parse(win.ReadString());
-				win.ReadEndElement();
-				win.ReadStartElement("Played");
-				played = int.Parse(win.ReadString());
-				if(played != 0)
-				{
-					ans = ((winNum * 100) / played);
-					data[0] = ans;
-				}
-				else
-				{
-					data[0] = 0.0F;
-				}
-				win.ReadEndElement();
-				win.ReadEndElement();
+                using (XmlTextReader win = new XmlTextReader("WinPercent.xml"))
+                {
 
-				win.ReadStartElement("DPO");
-				win.ReadStartElement("Won");
-				winNum = int.Parse(win.ReadString());
-				win.ReadEndElement();
-				win.ReadStartElement("Played");
-				played = int.Parse(win.ReadString());
-				if(played != 0)
-				{
-					ans = ((winNum * 100) / played);
-					data[1] = ans;
-				}
-				else
-				{
-					data[1] = 0.0F;
-				}
-				win.ReadEndElement();
-				win.ReadEndElement();
-		
-				win.ReadStartElement("MCX");
-				win.ReadStartElement("Won");
-				winNum = int.Parse(win.ReadString());
-				win.ReadEndElement();
-				win.ReadStartElement("Played");
-				played = int.Parse(win.ReadString());
-				if(played != 0)
-				{
-					ans = ((winNum * 100) / played);
-					data[2] = ans;
-				}
-				else
-				{
-					data[2] = 0.0F;
-				}
-				win.ReadEndElement();
-				win.ReadEndElement();
+                    win.ReadStartElement("Win");
 
-				win.ReadStartElement("MCO");
-				win.ReadStartElement("Won");
-				winNum = int.Parse(win.ReadString());
-				win.ReadEndElement();
-				win.ReadStartElement("Played");
-				played = int.Parse(win.ReadString());
-				if(played != 0)
-				{
-					ans = ((winNum * 100) / played);
-					data[3] = ans;
-				}
-				else
-				{
-					data[3] = 0.0F;
-				}
-				win.ReadEndElement();
-				win.ReadEndElement();
+                    win.ReadStartElement("DPX");
+                    win.ReadStartElement("Won");
+                    winNum = int.Parse(win.ReadString());
+                    win.ReadEndElement();
+                    win.ReadStartElement("Played");
+                    played = int.Parse(win.ReadString());
+                    if (played != 0)
+                    {
+                        ans = ((winNum * 100) / played);
+                        data[0] = ans;
+                    }
+                    else
+                    {
+                        data[0] = 0.0F;
+                    }
+                    win.ReadEndElement();
+                    win.ReadEndElement();
 
-				win.ReadStartElement("TDX");
-				win.ReadStartElement("Won");
-				winNum = int.Parse(win.ReadString());
-				win.ReadEndElement();
-				win.ReadStartElement("Played");
-				played = int.Parse(win.ReadString());
-				if(played != 0)
-				{
-					ans = ((winNum * 100) / played);
-					data[4] = ans;
-				}
-				else
-				{
-					data[4] = 0.0F;
-				}
-				win.ReadEndElement();
-				win.ReadEndElement();
+                    win.ReadStartElement("DPO");
+                    win.ReadStartElement("Won");
+                    winNum = int.Parse(win.ReadString());
+                    win.ReadEndElement();
+                    win.ReadStartElement("Played");
+                    played = int.Parse(win.ReadString());
+                    if (played != 0)
+                    {
+                        ans = ((winNum * 100) / played);
+                        data[1] = ans;
+                    }
+                    else
+                    {
+                        data[1] = 0.0F;
+                    }
+                    win.ReadEndElement();
+                    win.ReadEndElement();
 
-				win.ReadStartElement("TDO");
-				win.ReadStartElement("Won");
-				winNum = int.Parse(win.ReadString());
-				win.ReadEndElement();
-				win.ReadStartElement("Played");
-				played = int.Parse(win.ReadString());
-				if(played != 0)
-				{
-					ans = ((winNum * 100) / played);
-					data[5] = ans;
-				}
-				else
-				{
-					data[5] = 0.0F;
-				}
-				win.ReadEndElement();
-				win.ReadEndElement();
+                    win.ReadStartElement("MCX");
+                    win.ReadStartElement("Won");
+                    winNum = int.Parse(win.ReadString());
+                    win.ReadEndElement();
+                    win.ReadStartElement("Played");
+                    played = int.Parse(win.ReadString());
+                    if (played != 0)
+                    {
+                        ans = ((winNum * 100) / played);
+                        data[2] = ans;
+                    }
+                    else
+                    {
+                        data[2] = 0.0F;
+                    }
+                    win.ReadEndElement();
+                    win.ReadEndElement();
 
-				win.ReadStartElement("UserX");
-				win.ReadStartElement("Won");
-				winNum = int.Parse(win.ReadString());
-				win.ReadEndElement();
-				win.ReadStartElement("Played");
-				played = int.Parse(win.ReadString());
-				if(played != 0)
-				{
-					ans = ((winNum * 100) / played);
-					data[6] = ans;
-				}
-				else
-				{
-					data[6] = 0.0F;
-				}
-				win.ReadEndElement();
-				win.ReadEndElement();
+                    win.ReadStartElement("MCO");
+                    win.ReadStartElement("Won");
+                    winNum = int.Parse(win.ReadString());
+                    win.ReadEndElement();
+                    win.ReadStartElement("Played");
+                    played = int.Parse(win.ReadString());
+                    if (played != 0)
+                    {
+                        ans = ((winNum * 100) / played);
+                        data[3] = ans;
+                    }
+                    else
+                    {
+                        data[3] = 0.0F;
+                    }
+                    win.ReadEndElement();
+                    win.ReadEndElement();
 
-				win.ReadStartElement("UserO");
-				win.ReadStartElement("Won");
-				winNum = int.Parse(win.ReadString());
-				win.ReadEndElement();
-				win.ReadStartElement("Played");
-				played = int.Parse(win.ReadString());
-				if(played != 0)
-				{
-					ans = ((winNum * 100) / played);
-					data[7] = ans;
-				}
-				else
-				{
-					data[7] = 0.0F;
-				}
-				win.ReadEndElement();
-				win.ReadEndElement();
-				win.Close();
+                    win.ReadStartElement("TDX");
+                    win.ReadStartElement("Won");
+                    winNum = int.Parse(win.ReadString());
+                    win.ReadEndElement();
+                    win.ReadStartElement("Played");
+                    played = int.Parse(win.ReadString());
+                    if (played != 0)
+                    {
+                        ans = ((winNum * 100) / played);
+                        data[4] = ans;
+                    }
+                    else
+                    {
+                        data[4] = 0.0F;
+                    }
+                    win.ReadEndElement();
+                    win.ReadEndElement();
 
+                    win.ReadStartElement("TDO");
+                    win.ReadStartElement("Won");
+                    winNum = int.Parse(win.ReadString());
+                    win.ReadEndElement();
+                    win.ReadStartElement("Played");
+                    played = int.Parse(win.ReadString());
+                    if (played != 0)
+                    {
+                        ans = ((winNum * 100) / played);
+                        data[5] = ans;
+                    }
+                    else
+                    {
+                        data[5] = 0.0F;
+                    }
+                    win.ReadEndElement();
+                    win.ReadEndElement();
+
+                    win.ReadStartElement("UserX");
+                    win.ReadStartElement("Won");
+                    winNum = int.Parse(win.ReadString());
+                    win.ReadEndElement();
+                    win.ReadStartElement("Played");
+                    played = int.Parse(win.ReadString());
+                    if (played != 0)
+                    {
+                        ans = ((winNum * 100) / played);
+                        data[6] = ans;
+                    }
+                    else
+                    {
+                        data[6] = 0.0F;
+                    }
+                    win.ReadEndElement();
+                    win.ReadEndElement();
+
+                    win.ReadStartElement("UserO");
+                    win.ReadStartElement("Won");
+                    winNum = int.Parse(win.ReadString());
+                    win.ReadEndElement();
+                    win.ReadStartElement("Played");
+                    played = int.Parse(win.ReadString());
+                    if (played != 0)
+                    {
+                        ans = ((winNum * 100) / played);
+                        data[7] = ans;
+                    }
+                    else
+                    {
+                        data[7] = 0.0F;
+                    }
+                    win.ReadEndElement();
+                    win.ReadEndElement();
+                }
 			}
 			catch(System.IO.FileNotFoundException)
 			{
@@ -191,9 +195,9 @@ namespace TicTacToe
 				{
 					data[j] = 0.0F;
 				}
-			}
-
-		}
+            }
+            #endregion
+        }
 
 		/// <summary>
 		/// Clean up any resources being used.
@@ -246,12 +250,14 @@ namespace TicTacToe
 		}
 		#endregion
 
+        /// <summary>
+        /// Paint Bar Chart of Win %
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 		private void PaintGraph(object sender, System.Windows.Forms.PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
-			
-			Font font = new Font("Trebuchet MS",10);
-			Font smallFont = new Font("Trebuchet MS",8);
 			
 			float barWidth = this.pictureBox1.Width/8;
 
@@ -268,12 +274,13 @@ namespace TicTacToe
 
                 using (Brush brush = new SolidBrush(colors[i]))
                 using (Brush blackBrush = new SolidBrush(Color.Black))
+                using (Font font = new Font("Trebuchet MS",10))
+                using (Font smallFont = new Font("Trebuchet MS",8))
                 {
                     g.FillRectangle(brush, agentPosition.X, agentPosition.Y, barWidth, agentBarHeight);
                     g.DrawString(data[i].ToString() + "%", font, blackBrush, agentPosition.X + 5, agentPosition.Y - 20);
                     g.DrawString(labels[i], smallFont, blackBrush, agentPosition.X, this.pictureBox1.Height - 20);
-                }
-                     
+                }    
             }
 		}
 	}
