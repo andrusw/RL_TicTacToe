@@ -70,14 +70,15 @@ namespace TicTacToe
         //Used to find where user has clicked
         private int[,] arrayPositionReference = new int[3, 3] { { 0, 3, 6 }, { 1, 4, 7 }, { 2, 5, 8 } };
 
+        protected const int BOARD_SIZE = 9;
         protected int turn = 0;
-		protected int[] currentState = new int[9]{0,0,0,0,0,0,0,0,0}; 
-		protected int[] previousState = new int[9]{0,0,0,0,0,0,0,0,0};
+		protected int[] currentState = new int[BOARD_SIZE]{0,0,0,0,0,0,0,0,0}; 
+		protected int[] previousState = new int[BOARD_SIZE]{0,0,0,0,0,0,0,0,0};
 		protected int win = 0;
 		
         private GameType gameType = 0;
 
-		private int movesLeft = 9;
+        private int movesLeft = BOARD_SIZE;
 		private Agent.DynamicProgramming agentDPO;
 		private Agent.DynamicProgramming agentDPX;
 		private Agent.MonteCarlo agentMCO;
@@ -509,10 +510,10 @@ namespace TicTacToe
 		private void menuItemFileNewGameSinglePlayerAsX_Click(object sender, System.EventArgs e)
 		{
 			this.turn = 0;
-			movesLeft = 9;
+            movesLeft = BOARD_SIZE;
 			win = 0;
 			gameType = GameType.UserXVsAgent;
-			currentState = new int[9]{0,0,0,0,0,0,0,0,0};
+            currentState = new int[BOARD_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 			//User.User userX = new User.User();
 
             //Player makes first move, so just need to initialize agents
@@ -540,10 +541,10 @@ namespace TicTacToe
 		private void menuItemFileNewGameSinglePlayerAsO_Click(object sender, System.EventArgs e)
 		{
 			this.turn = 0;
-			movesLeft = 9;
+            movesLeft = BOARD_SIZE;
 			win = 0;
 			gameType = GameType.UserOVsAgent;
-			currentState = new int[9]{0,0,0,0,0,0,0,0,0};
+            currentState = new int[BOARD_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             GetMove getMove;
 
             //Agent makes first, need to pull first move.
@@ -576,10 +577,10 @@ namespace TicTacToe
 		private void menuItemFileNewGameTwoPlayer_Click(object sender, System.EventArgs e)
 		{
 			this.turn = 0;
-			movesLeft = 9;
+            movesLeft = BOARD_SIZE;
 			win = 0;
 			gameType = GameType.UserVsUser;
-			currentState = new int[9]{0,0,0,0,0,0,0,0,0};
+            currentState = new int[BOARD_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 			User.User userO = new User.User();
 			User.User userX = new User.User();
 			this.pictureBox.Invalidate();
@@ -652,10 +653,10 @@ namespace TicTacToe
                 this.progressBar.Increment(this.progressBar.Step);
                 this.pictureBox.Invalidate();
 
-                movesLeft = 9;
+                movesLeft = BOARD_SIZE;
                 win = 0;
                 gameType = GameType.AgentVsAgent;
-                currentState = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                currentState = new int[BOARD_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
                 bool turnBase = true;
 
@@ -716,7 +717,7 @@ namespace TicTacToe
         /// <param name="player"></param>
         private void MakeAgentVsAgentMove(GetMove getMove, Player player)
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < BOARD_SIZE; i++)
             {
                 previousState[i] = currentState[i];
             }
@@ -1400,7 +1401,7 @@ based on the move that was made (like monte carlo method).", "Small Introduction
         private void MakeAgentsMoveAgainstUser()
         {
             //agentO
-            if (this.gameType == GameType.UserXVsAgent && this.movesLeft != 9 && win == 0 && turn == 1)
+            if (this.gameType == GameType.UserXVsAgent && this.movesLeft != BOARD_SIZE && win == 0 && turn == 1)
             {
                 GetMove getMove;
 
