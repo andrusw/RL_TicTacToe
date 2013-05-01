@@ -5,33 +5,13 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace TicTacToe.Agent
+namespace TicTacToe.Configuration
 {
 	/// <summary>
 	/// Summary description for ConfigureMC.
 	/// </summary>
-	public class ConfigureMC : System.Windows.Forms.Form
-	{
-		private System.Windows.Forms.Label labelEpsilon;
-		private System.Windows.Forms.NumericUpDown numericUpDownEpsilon;
-		private System.Windows.Forms.Button buttonHelpOnEpsilon;
-		private System.Windows.Forms.Label labelStep;
-		private System.Windows.Forms.NumericUpDown numericUpDownStep;
-		private System.Windows.Forms.Button buttonHelpOnStepSize;
-		private System.Windows.Forms.Label labelWin;
-		private System.Windows.Forms.Label labelTie;
-		private System.Windows.Forms.Label labelLost;
-		private System.Windows.Forms.NumericUpDown numericUpDownWin;
-		private System.Windows.Forms.NumericUpDown numericUpDownTie;
-		private System.Windows.Forms.NumericUpDown numericUpDownLost;
-		private System.Windows.Forms.Button buttonHelpOnRewards;
-		private System.Windows.Forms.GroupBox groupBoxRewards;
-		private System.Windows.Forms.GroupBox groupBoxAutoExploreNewStates;
-		private System.Windows.Forms.RadioButton radioButtonYes;
-		private System.Windows.Forms.RadioButton radioButtonNo;
-		private System.Windows.Forms.Button buttonHelpOnAutoExplore;
-		private System.Windows.Forms.Button buttonOK;
-		
+    public class ConfigureMC : ConfigForm
+	{	
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -44,50 +24,7 @@ namespace TicTacToe.Agent
 			//
 			InitializeComponent();
 
-			try
-			{
-				XmlTextReader MCconfig = new XmlTextReader("MCConfig.xml");
-				
-				MCconfig.ReadStartElement("MonteCarlo");
-				MCconfig.ReadStartElement("Epsilon");
-				this.numericUpDownEpsilon.Value = decimal.Parse(MCconfig.ReadString());
-				MCconfig.ReadEndElement();
-				MCconfig.ReadStartElement("Stepsize");
-				this.numericUpDownStep.Value = decimal.Parse(MCconfig.ReadString());
-				MCconfig.ReadEndElement();
-				MCconfig.ReadStartElement("Reward");
-				MCconfig.ReadStartElement("Win");
-				this.numericUpDownWin.Value = int.Parse(MCconfig.ReadString());
-				MCconfig.ReadEndElement();
-				MCconfig.ReadStartElement("Tie");
-				this.numericUpDownTie.Value = int.Parse(MCconfig.ReadString());
-				MCconfig.ReadEndElement();
-				MCconfig.ReadStartElement("Loss");
-				this.numericUpDownLost.Value = int.Parse(MCconfig.ReadString());
-				MCconfig.ReadEndElement();
-				MCconfig.ReadEndElement();
-				MCconfig.ReadStartElement("AutoExplore");
-				string ans = MCconfig.ReadString();
-				if(ans == "Yes")
-				{
-					this.radioButtonYes.Checked = true;
-					this.radioButtonNo.Checked = false;
-				}
-				else //ans == no
-				{
-					this.radioButtonYes.Checked = false;
-					this.radioButtonNo.Checked = true;
-				}
-				MCconfig.Close();
-			}
-			catch(System.IO.FileNotFoundException)
-			{
-				//do nothing, use defaults
-			}
-			catch(Exception err)
-			{
-				MessageBox.Show(err.ToString(),"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-			}
+            ReadConfig("MCConfig.xml", "MonteCarlo");
 		}
 
 		/// <summary>
@@ -127,7 +64,7 @@ namespace TicTacToe.Agent
             this.numericUpDownLost = new System.Windows.Forms.NumericUpDown();
             this.buttonHelpOnRewards = new System.Windows.Forms.Button();
             this.groupBoxRewards = new System.Windows.Forms.GroupBox();
-            this.groupBoxAutoExploreNewStates = new System.Windows.Forms.GroupBox();
+            this.groupBoxAutoExplore = new System.Windows.Forms.GroupBox();
             this.radioButtonNo = new System.Windows.Forms.RadioButton();
             this.radioButtonYes = new System.Windows.Forms.RadioButton();
             this.buttonHelpOnAutoExplore = new System.Windows.Forms.Button();
@@ -138,7 +75,7 @@ namespace TicTacToe.Agent
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLost)).BeginInit();
             this.groupBoxRewards.SuspendLayout();
-            this.groupBoxAutoExploreNewStates.SuspendLayout();
+            this.groupBoxAutoExplore.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelEpsilon
@@ -333,16 +270,16 @@ namespace TicTacToe.Agent
             // 
             // groupBoxAutoExploreNewStates
             // 
-            this.groupBoxAutoExploreNewStates.Controls.Add(this.radioButtonNo);
-            this.groupBoxAutoExploreNewStates.Controls.Add(this.radioButtonYes);
-            this.groupBoxAutoExploreNewStates.Controls.Add(this.buttonHelpOnAutoExplore);
-            this.groupBoxAutoExploreNewStates.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxAutoExploreNewStates.Location = new System.Drawing.Point(8, 168);
-            this.groupBoxAutoExploreNewStates.Name = "groupBoxAutoExploreNewStates";
-            this.groupBoxAutoExploreNewStates.Size = new System.Drawing.Size(312, 64);
-            this.groupBoxAutoExploreNewStates.TabIndex = 7;
-            this.groupBoxAutoExploreNewStates.TabStop = false;
-            this.groupBoxAutoExploreNewStates.Text = "Auto Explore New States?";
+            this.groupBoxAutoExplore.Controls.Add(this.radioButtonNo);
+            this.groupBoxAutoExplore.Controls.Add(this.radioButtonYes);
+            this.groupBoxAutoExplore.Controls.Add(this.buttonHelpOnAutoExplore);
+            this.groupBoxAutoExplore.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxAutoExplore.Location = new System.Drawing.Point(8, 168);
+            this.groupBoxAutoExplore.Name = "groupBoxAutoExploreNewStates";
+            this.groupBoxAutoExplore.Size = new System.Drawing.Size(312, 64);
+            this.groupBoxAutoExplore.TabIndex = 7;
+            this.groupBoxAutoExplore.TabStop = false;
+            this.groupBoxAutoExplore.Text = "Auto Explore New States?";
             // 
             // radioButtonNo
             // 
@@ -388,7 +325,7 @@ namespace TicTacToe.Agent
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(328, 269);
             this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.groupBoxAutoExploreNewStates);
+            this.Controls.Add(this.groupBoxAutoExplore);
             this.Controls.Add(this.groupBoxRewards);
             this.Controls.Add(this.buttonHelpOnStepSize);
             this.Controls.Add(this.numericUpDownStep);
@@ -405,103 +342,21 @@ namespace TicTacToe.Agent
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTie)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLost)).EndInit();
             this.groupBoxRewards.ResumeLayout(false);
-            this.groupBoxAutoExploreNewStates.ResumeLayout(false);
+            this.groupBoxAutoExplore.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
 		#endregion
 
-        private void buttonHelpOnEpsilon_Click(object sender, System.EventArgs e)
-		{
-			MessageBox.Show("EPSILON is used for exploitation to set a range of acceptable values.\n"+
-				            "If there are 2 or more values that are within a acceptable \"range\""+
-				            "then the agent will randomly select among those\n"+ 
-					        "eg.  State1 = .9, State2 = .8, State3 = .79\n"+
-							"with epsilon at 0.1 it would look at anything within 0.9 - 0.1 = 0.8\n"+
-				            "\nThe Maximum value of epsilon is 1.0, in this case the possible states are randomly selected.\n"+
-				            "The Minimum value of epsilon is 0.0, in this case only the highest value would be selected.","Epsilon Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
-		}
-
-        private void buttonHelpOnStepSize_Click(object sender, System.EventArgs e)
-		{
-			MessageBox.Show("The smaller the STEP SIZE the smarter the agent will play\n"+
-							"but then the agent will need to play more games. (Takes a longer time to learn)\n"+
-							"I recommended to use a higher STEPSIZE like 0.1 in the beginning of learning\n"+
-				            "then change the step size to a lower value later on.\n"+ 
-							"\nTry 0.1 (Ten visits per state to get a decent value) then\n"+
-							"Try 0.01 (One Hundred visits per state) then\n"+
-							"Try 0.001 (1000 visits/state) and so on\n"+
-							"\nThe step size value deals with the updating of the state's value\n"+
-				            "The formula is as follow\n"+
-				            "newValue = oldValue + stepSize * ( REWARD - oldValue)","Step Size Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
-		}
-
-        private void buttonHelpOnRewards_Click(object sender, System.EventArgs e)
-		{
-			MessageBox.Show("The \"win\" represents the reward or punishment you will give the agent anytime it wins\n"+
-							"The \"tie\" represents the reward or punishment you will give the agent when the game is a tie\n"+
-							"The \"lost\" represents the reward or punishment you will give the agent anytime it loses\n"+
-							"\nPlaying around with these values can change how well and quickly the agent may learn\n"+
-							"By default the agent is given a +1 for a win, a 0 for a tie, and a -1 for a lost\n"+
-							"However, some other interesting rewards may be\n"+
-							"win: +1, tie: -1, lost:  -1   Here anything but a win is only satisfactory\n"+
-							"win: 0, tie: -1, lost: -2     Here the agent learns to fear ties and lost, and receives no positive reinforcement\n"
-							,"Help on Rewards",MessageBoxButtons.OK, MessageBoxIcon.Information);
-		}
-
-        private void buttonHelpOnAutoExplore_Click(object sender, System.EventArgs e)
-		{
-			MessageBox.Show("Automatic exploration of new states will allow your agent to learn\n"+
-							"more quickly, by visiting states new states no matter what the other\n"+
-							"values of the visited states might be. The more states that the agent\n"+
-							"knows of, the smarter it will be.","Information on Automatic Exploration of New States",MessageBoxButtons.OK,MessageBoxIcon.Information);
-		}
-
+        /// <summary>
+        /// OK Button Click Event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonOK_Click(object sender, System.EventArgs e)
 		{
-			try
-			{
-				XmlTextWriter MCconfig = new XmlTextWriter("MCConfig.xml",System.Text.Encoding.Default);
-				MCconfig.WriteStartDocument(true);
-				MCconfig.WriteComment("This xml is used to configure the Monte Carlo learning");
-				MCconfig.WriteStartElement("MonteCarlo");
-				MCconfig.WriteStartElement("Epsilon");
-				MCconfig.WriteString(this.numericUpDownEpsilon.Value.ToString());
-				MCconfig.WriteEndElement();
-				MCconfig.WriteStartElement("Stepsize");
-				MCconfig.WriteString(this.numericUpDownStep.Value.ToString());
-				MCconfig.WriteEndElement();
-				MCconfig.WriteStartElement("Reward");
-				MCconfig.WriteStartElement("Win");
-				MCconfig.WriteString(this.numericUpDownWin.Value.ToString());
-				MCconfig.WriteEndElement();
-				MCconfig.WriteStartElement("Tie");
-				MCconfig.WriteString(this.numericUpDownTie.Value.ToString());
-				MCconfig.WriteEndElement();
-				MCconfig.WriteStartElement("Loss");
-				MCconfig.WriteString(this.numericUpDownLost.Value.ToString());
-				MCconfig.WriteEndElement();
-				MCconfig.WriteEndElement();
-				MCconfig.WriteStartElement("AutoExplore");
-				if(this.radioButtonYes.Checked)
-				{
-					MCconfig.WriteString("Yes");
-				}
-				else
-				{
-					MCconfig.WriteString("No");
-				}
-				MCconfig.WriteEndElement();
-				MCconfig.WriteEndElement();
-				MCconfig.WriteEndDocument();
-				MCconfig.Close();
-			}
-			catch(Exception err)
-			{
-				MessageBox.Show(err.ToString(),"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-			}
-			this.Close();
+            WriteConfig("MCConfig.xml", "MonteCarlo", "Monte Carlo");
+            this.Close();
 		}
-
 	}
 }

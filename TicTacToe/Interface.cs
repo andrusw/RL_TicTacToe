@@ -9,6 +9,7 @@ using System.Threading;
 using System.Xml;
 using System.IO;
 using TicTacToe.Game;
+using TicTacToe.Configuration;
 
 namespace TicTacToe
 {
@@ -783,7 +784,7 @@ namespace TicTacToe
         /// <param name="e"></param>
 		private void menuItemEditAgentLearningStyleDP_Click(object sender, System.EventArgs e)
 		{
-			Form configDP = new Agent.ConfigureDP();
+			Form configDP = new Configuration.ConfigureDP();
 			configDP.Show();
 		}
 
@@ -794,7 +795,7 @@ namespace TicTacToe
         /// <param name="e"></param>
         private void menuItemEditAgentLearningStyleMC_Click(object sender, System.EventArgs e)
 		{
-			Form configMC = new Agent.ConfigureMC();
+            Form configMC = new Configuration.ConfigureMC();
 			configMC.Show();
 		}
 
@@ -805,7 +806,7 @@ namespace TicTacToe
         /// <param name="e"></param>
         private void menuItemEditAgentLearningStyleTD_Click(object sender, System.EventArgs e)
 		{
-			Form configTD = new Agent.ConfigureTD();
+            Form configTD = new Configuration.ConfigureTD();
 			configTD.Show();
 		}
 

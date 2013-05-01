@@ -11,16 +11,21 @@ namespace TicTacToe
 	/// Summary description for ComputerVsComputerCount.
 	/// </summary>
 	public class ComputerVsComputerCount : System.Windows.Forms.Form
-	{
-		private System.Windows.Forms.Label labelDescription;
+    {
+        #region Form Items
+        private System.Windows.Forms.Label labelDescription;
 		private System.Windows.Forms.NumericUpDown numericUpDown;
 		private System.Windows.Forms.Button buttonOK;
-		/// <summary>
+        #endregion
+        /// <summary>
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 		public int count = 1;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
 		public ComputerVsComputerCount()
 		{
 			//
@@ -117,14 +122,28 @@ namespace TicTacToe
 		private void buttonOK_Click(object sender, System.EventArgs e)
 		{
 			count = Convert.ToInt32(this.numericUpDown.Value);
-			XmlTextWriter counter = new XmlTextWriter("Interplay.xml",System.Text.Encoding.Default);
-			counter.WriteStartDocument(true);
-			counter.WriteComment("Just a small xml, dealing with the number of times a computer vs. computer would play");
-			counter.WriteStartElement("count");
-			counter.WriteString(this.numericUpDown.Value.ToString());
-			counter.WriteEndElement();
-			counter.WriteEndDocument();
-			counter.Close();
+
+            try
+            {
+                using (XmlTextWriter counter = new XmlTextWriter("Interplay.xml", System.Text.Encoding.Default))
+                {
+                    counter.WriteStartDocument(true);
+                    counter.WriteComment("Just a small xml, dealing with the number of times a computer vs. computer would play");
+                    counter.WriteStartElement("count");
+                    counter.WriteString(this.numericUpDown.Value.ToString());
+                    counter.WriteEndElement();
+                    counter.WriteEndDocument();
+                }
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                //do nothing, use defaults
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 			this.Close();
 		}
 	}

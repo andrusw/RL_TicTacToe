@@ -109,13 +109,16 @@
     <Compile Include="ComputerVsComputerCount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigureDP.cs">
+    <Compile Include="Configuration\ConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigureMC.cs">
+    <Compile Include="Configuration\ConfigureDP.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigureTD.cs">
+    <Compile Include="Configuration\ConfigureMC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\ConfigureTD.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Agent\MonteCarlo.cs" />
@@ -149,14 +152,14 @@
       <DependentUpon>ComputerVsComputerCount.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfigureDP.resx">
+    <EmbeddedResource Include="Configuration\ConfigureDP.resx">
       <DependentUpon>ConfigureDP.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfigureMC.resx">
+    <EmbeddedResource Include="Configuration\ConfigureMC.resx">
       <DependentUpon>ConfigureMC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfigureTD.resx">
+    <EmbeddedResource Include="Configuration\ConfigureTD.resx">
       <DependentUpon>ConfigureTD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Graph.resx">
@@ -196,6 +199,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent />
