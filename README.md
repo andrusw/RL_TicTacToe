@@ -1,4 +1,4 @@
-RL_TicTacToe
+RL_TicTacToe  check out the wiki: https://github.com/andrusw/RL_TicTacToe/wiki
 ============
 
 HISTORY
@@ -12,9 +12,9 @@ REINFORCEMENT LEARNING
 ======================
 Reinforcement learning is the process for a program to interact within an environment and 
 learn by receiving numerical rewards or punishment while trying to obtain a goal. In this case, 
-the goal is to win when dealing with tic-tac-toe. The environment is ìwhereî and ìhowî a program, 
+the goal is to win when dealing with tic-tac-toe. The environment is ‚Äúwhere‚Äù and ‚Äúhow‚Äù a program, 
 that is using reinforcement learning, interacts against its opponents in the game. The reward/punishment 
-is a scalar value. Depending on the programís decisions and actions, it will make a move and recieve an
+is a scalar value. Depending on the program‚Äôs decisions and actions, it will make a move and recieve an
 reward later.
 
 
