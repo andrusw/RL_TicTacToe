@@ -1,5 +1,6 @@
-RL_TicTacToe  check out the wiki: https://github.com/andrusw/RL_TicTacToe/wiki
+RL_TicTacToe  
 ============
+check out the wiki: https://github.com/andrusw/RL_TicTacToe/wiki
 
 HISTORY
 =======
